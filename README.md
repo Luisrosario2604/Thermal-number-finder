@@ -15,11 +15,11 @@ The goal here is to find the numbers touched from a thermal photo
 ```bash
 $ pip install -r requirements.txt
 ```
-######flirimageextractor==1.4.0
-######matplotlib==3.3.4
-######numpy==1.21.3
-######opencv_python==4.5.3.56
-######Pillow==8.4.0
+###### flirimageextractor==1.4.0
+###### matplotlib==3.3.4
+###### numpy==1.21.3
+###### opencv_python==4.5.3.56
+###### Pillow==8.4.0
 
 ## Usage
 
