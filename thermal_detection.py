@@ -21,6 +21,10 @@ import pickle
 from math import sqrt
 
 
+# Global values
+is_showing_result = True
+
+
 # Function declarations
 def get_arguments():
     ap = argparse.ArgumentParser()
@@ -56,7 +60,7 @@ def digit_deduction(digits):
         score = digits.count(digit)
         if score >= 200:
             final_digits.append([digit, score])
-    return sorted(final_digits, key=itemgetter(0))
+    return sorted(final_digits, key=itemgetter(1))
 
 
 def open_file(filename):
@@ -88,7 +92,8 @@ def detect_shape(gray, frame):
                 rectangles_detection_pos.append([x + (w / 2), y + (h / 2)])
                 cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 1)
 
-    cv2.imshow("Shape", frame)
+    if is_showing_result:
+        cv2.imshow("Detection", frame)
     return rectangles_detection_pos
 
 
@@ -125,7 +130,6 @@ def main():
         img_gray_mask = cv2.bitwise_and(img_gray, thermal_mask)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
-        cv2.imshow("Thermal mask", thermal_mask)
 
         rectangles_detection_pos = detect_shape(thermal_mask, img_gray_mask)
         digits.extend(detect_number_touched(rectangles_detection_pos, digit_center))
