@@ -6,8 +6,9 @@
 # ** Dectection digit position
 # ** File description:
 # ** Detecting thermal sections
-# ** https://github.com/Luisrosario2604
+# ** https://github.com/natalialperez
 # ** https://github.com/vgilabert94
+# ** https://github.com/Luisrosario2604
 # */
 
 # Imports
