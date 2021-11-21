@@ -55,12 +55,20 @@ def print_result(final_result):
     print("CSV result : " + str(result_txt[:-1]))
 
 
-def digit_deduction(digits):
+def digit_deduction(digits_and_counter):
+    digits, counter = map(list, zip(*digits_and_counter))
     final_digits = []
     for digit in range(1, 10):
         score = digits.count(digit)
         if score >= 200:
-            final_digits.append([digit, score])
+            final_digits.append([digit, 0])
+
+    for dc in digits_and_counter:
+        for i, fd in enumerate(final_digits):
+            if fd[0] == dc[0]:
+                if dc[1] > fd[1]:
+                    final_digits[i][1] = round(dc[1], 3)
+
     return sorted(final_digits, key=itemgetter(1))
 
 
@@ -98,7 +106,7 @@ def detect_shape(gray, frame):
     return rectangles_detection_pos
 
 
-def detect_number_touched(rectangles_detection_pos, digit_center):
+def detect_number_touched(rectangles_detection_pos, digit_center, counter):
     digits = []
     for detected_pos in rectangles_detection_pos:
         dist = 20
@@ -110,7 +118,7 @@ def detect_number_touched(rectangles_detection_pos, digit_center):
                 digit = int(c[0])
                 i = True
         if i:
-            digits.append(digit)
+            digits.append([digit, counter])
     return digits
 
 
@@ -123,20 +131,20 @@ def main():
 
     flir_thermal_norm, img_rgb, img_term = open_file(args["file"])
 
-    valor = 150
-    digits = []
-    while valor <= 260:
-        thermal_mask = np.uint8(np.logical_not((flir_thermal_norm * 255) > valor)) * 255
+    counter = 150
+    digits_and_counter = []
+    while counter <= 260:
+        thermal_mask = np.uint8(np.logical_not((flir_thermal_norm * 255) > counter)) * 255
         img_gray = cv2.cvtColor(img_rgb, cv2.COLOR_BGR2GRAY)
         img_gray_mask = cv2.bitwise_and(img_gray, thermal_mask)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
         rectangles_detection_pos = detect_shape(thermal_mask, img_gray_mask)
-        digits.extend(detect_number_touched(rectangles_detection_pos, digit_center))
+        digits_and_counter.extend(detect_number_touched(rectangles_detection_pos, digit_center, counter))
 
-        valor += 0.05
-    final_result = digit_deduction(digits)
+        counter += 0.05
+    final_result = digit_deduction(digits_and_counter)
     cv2.destroyAllWindows()
 
     print_result(final_result)
