@@ -38,7 +38,7 @@ $ python thermal_detection.py --file=./CODIGOS_ETIQUETADOS/DIGITOS_020.jpg
 #### (Bonus) See image used and thermal value
 
 ```bash
-$ python leer_digitos.py --file=./CODIGOS_ETIQUETADOS/DIGITOS_001.jpg
+$ python manual_digit_reader.py --file=./CODIGOS_ETIQUETADOS/DIGITOS_001.jpg
 ```
 
 ## Example

@@ -3,7 +3,7 @@
 
 # /
 # ** Natalia / Vicent / Luis, 2021
-# ** Leer digitos
+# ** Manual digit reader
 # ** File description:
 # ** Detecting thermal sections
 # ** https://github.com/natalialperez
