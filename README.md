@@ -1,4 +1,4 @@
-# Numero-calientes
+# Thermal number finder
 
 The goal here is to find the numbers touched from a thermal photo
 
