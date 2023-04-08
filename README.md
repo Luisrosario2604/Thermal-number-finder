@@ -2,6 +2,8 @@
 
 The goal here is to find the numbers touched from a thermal photo
 
+#### 👨‍🎓 This project was carried out during my master's degree in computer vision at URJC - Madrid
+
 ## Goals
 
 - Detect where are the numbers in the photo
